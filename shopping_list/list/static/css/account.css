@@ -1,0 +1,63 @@
+.container {
+    background-color: rgb(230, 230, 230);
+    margin: 0px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+}
+#username-inbox {
+    font-size: 25px;
+    border-radius: 5px
+}
+
+#username-label {
+    font-size: 25px
+}
+#change-username {
+    margin-left: 15px;
+    font-size: 25px;
+    border-radius: 10px;
+    border: transparent;
+    background-color: rgb(120 120 255 / 75%);
+}
+#change-username:hover {
+    background-color: rgb(120 120 255);
+}
+#change-username:active {
+    background-color: rgb(88 88 201);
+    transform: translateY(1px) translateX(1px);
+}
+
+.buttons {
+    font-size: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    border: 1px solid;
+}
+
+.buttons {
+font-size: 20px;
+border-radius: 5px;
+border: transparent;
+background-color: rgb(255, 0, 0, 0.5);
+}
+.buttons:hover {
+    background-color: rgb(255, 0, 0);
+}
+.buttons:active {
+    background-color: rgb(170, 0, 0);
+    transform: translateY(2px) translateX(2px);
+}
+#delete-account-button {
+    margin-left: 310px;
+}
+.error {
+margin-top: 0px;
+color: red;
+position: fixed;
+bottom: 40px;
+left: 50%;
+transform: translateX(-50%)
+}

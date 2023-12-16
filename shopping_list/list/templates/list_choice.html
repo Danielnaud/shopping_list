@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>list choice</title>
+    <link rel="stylesheet" href="{% static 'css/style_list.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dialog.css' %}">
+</head>
+<body>
+    <div id="header">
+        <h1>Listenauswahl</h1>
+    </div>
+    <br>
+    <button class="add_button" id="add-button" onclick="openDialog('add-list-dialog')">+</button>
+
+    <button id="account-button" onclick="redirectToAccount()">
+        <img src="{% static 'resources/account-icon.png' %}" 
+             alt="account"
+             height="50px">
+    </button>
+
+    <div class="container">
+    {% for list in shopping_lists %}
+    <div id="list-item-list-choice" class="list-item">
+        <div id="click-div" onclick="selectList('{{ list.id }}')">
+            {{ list.name }}
+        </div>
+
+        <div id="user-display-container">
+        
+        {% for list_user in list.users.all %}
+            {% if not list_user.username == list.owned_by %}
+                {% if list_user.username == user.username %}
+                    <div class="user_display">
+                        du
+                    </div>
+                {% else %}
+                    <div class="user_display">
+                        {{ list_user.username }}
+                        {% if user.username == list.owned_by %}
+                            <button onclick="removeUser('{{ list.id }}', '{{ list_user.id }}')" id="remove-user-button">
+                                <img src="{% static 'resources/cross-icon.png' %}" 
+                                     alt="remove user"
+                                     width="10px">
+                            </button>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        {% if user.username == list.owned_by %}
+            <div class="user_display" id="owner">
+                du
+            </div>
+        {% else %}
+            <div class="user_display" id="owner">
+                {{list.owned_by}}
+            </div>             
+        {% endif %}
+        </div>
+
+        <button id="add-user-button" onclick="openDialog('add-user-dialog'); setListIdForAddUser('{{ list.id }}')">
+            <img src="{% static 'resources/add-user-icon.png' %}" 
+                 alt="add user"
+                 width="15px"
+                 height="15px">
+        </button>
+
+        <button id="remove-button" onclick="deleteList('{{ list.id }}')">
+            <img src="{% static 'resources/delete-icon.png' %}"
+                 alt="trashcan"
+                 width="15px"
+                 height="15px">
+        </button>
+    </div>
+    {% endfor %}
+    </div>
+
+    {% if error_message %}
+    <div class="error" id="error-display">
+        {{ error_message }}
+    </div>
+    {% endif %}
+
+
+    <div id="body-overlay"></div>
+
+    <div class="dialog" id="add-list-dialog">
+        <button class="close-dialog-button" onclick="closeDialog('add-list-dialog')">x</button>
+        <h1>Neue Liste:</h3>
+        <form action="">
+            <input type="text" placeholder="Name" class="input-field" id="add-new-list" maxlength="100">
+        </form>
+        <button id="final-add-button-list" class="add_button final_add_button" onclick="addList()" disabled="true">+</button>
+    </div>
+
+    <div class="dialog" id="add-user-dialog">
+        <button class="close-dialog-button" onclick="closeDialog('add-user-dialog')">x</button>
+        <h1>Benutzer hinzufügen:</h3>
+        <form action="">
+            <input type="text" placeholder="username" class="input-field" id="add-new-user" maxlength="30">
+        </form>
+        <button id="final-add-button-user" class="add_button final_add_button" onclick="addUser()" disabled="true">+</button>
+    </div>
+
+    <script>
+        var CSRF_TOKEN = '{{ csrf_token }}';
+    </script>
+    <script src="{% static 'js/dialog.js'%}"></script>
+    <script src="{% static 'js/list_choice.js'%}"></script>
+    <script src="{% static 'js/accounts.js'%}"></script>
+
+</body>
+</html>

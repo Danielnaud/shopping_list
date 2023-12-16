@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign up</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Edu+TAS+Beginner&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style_login.css' %}">
+</head>
+<body>
+    <form action="" method="post" class="container">
+        {% csrf_token %}
+        <h2 class="header-label">Sign Up</h2>
+        <br>
+        <label for="username" class="labels">Username:</label>
+        <br>
+        <input type="text" placeholder="username" name="username" class="input" autocomplete="username" id="username" maxlength="30">
+        <br>
+        <label for="password" class="labels">Password:</label>
+        <br>
+        <input type="password" placeholder="password" name="password" class="input" id="password" autocomplete="new-password" maxlength="100">
+        <br>
+        <label for="password_confirm" class="labels">Confirm password:</label>
+        <br>
+        <input type="password" placeholder="confirm password" name="confirm_password" class="input" id="confirm-password" autocomplete="new-password" maxlength="100">
+        <br>
+        {% if error_message %}
+            <p class="error">{{ error_message }}</p>
+        {% endif %}
+        <input type="submit" value="Sign Up" id="sign-up-button" class="submit-button" disabled="true">
+    </form>
+    <script src="{% static 'js/signup.js'%}"></script>
+</body>
+</html>

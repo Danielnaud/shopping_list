@@ -1,0 +1,91 @@
+#body-overlay {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.dialog {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: white;
+    color: black;
+    border-radius: 10px;
+    box-shadow: 10px 10px 18px rgb(0, 0, 0, 0.6);
+    opacity: 0;
+    pointer-events: none;
+}
+
+#body-overlay.visible, .dialog.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.close-dialog-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgb(255, 0, 0, 0.5);
+    border: 0px;
+    font-size: large;
+    border-radius: 5px;
+}.close-dialog-button:hover {
+    background-color: rgb(255, 0, 0);;
+}.close-dialog-button:active {
+    background-color: rgb(170, 0, 0);
+    transform: translateY(1px) translateX(1px);
+}
+
+.input-field {
+    font-family: 'Edu TAS Beginner', cursive;
+    font-size: 20px;
+    border: 2px solid black;
+    border-radius: 4px;
+    width: 85%;
+}.input-field:placeholder-shown {
+    font-family: 'Edu TAS Beginner', cursive;
+}
+.final_add_button{
+    border: 2px solid;
+    box-shadow: 2px 2px 2px rgba(70, 69, 69, 0.596);
+    position: absolute;
+    top: 67%;
+    right: 10px;
+    font-size: large;
+}.final_add_button:enabled:active {
+    box-shadow: 2px 2px 1px rgba(70, 69, 69, 0.596);
+    transform: translateY(1px) translateX(1px);
+}.final_add_button:disabled {
+    background-color: rgba(89, 89, 226, 0.5);
+}
+
+.confirm_button {
+    font-size: 20px;
+    border-radius: 5px;
+    border: transparent;
+}
+.confirm_button:hover {
+    background-color: rgb(128 128 128 / 75%)
+}
+.confirm_button:active {
+    transform: translateY(1px) translateX(1px);
+}
+    
+#cancel {
+    background-color: rgb(255, 0, 0, 0.5);
+    float: right;
+    
+}
+#cancel:hover {
+    background-color: rgb(255, 0, 0);
+}
+#cancel:active {
+    background-color: rgb(170, 0, 0);
+}

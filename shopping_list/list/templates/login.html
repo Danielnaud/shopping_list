@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Edu+TAS+Beginner&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style_login.css' %}">
+</head>
+<body>
+    <form class="container" method="post">
+        {% csrf_token %}
+        <h3 class="header-label">Login</h3>
+        <br>
+        <label for="username" class="labels">Username:</label>
+        <br>
+        <input type="text" placeholder="username" class="input" name="username" id="username" autocomplete="username">
+        <br>
+        <label for="password" class="labels">Password:</label>
+        <br>
+        <input type="password" placeholder="password" class="input" name="password" id="password" autocomplete="current-password">
+        <br>
+        {% if error_message %}
+            <p class="error">{{ error_message }}</p>
+        {% endif %}
+        <input type="submit" id="login-button" class="submit-button" value="Login" disabled="true">
+        <a href="#" id="link-to-signup">Sign up here!</a>
+    </form>
+
+    <script src="{% static 'js/logins.js'%}"></script>
+
+</body>
+</html>

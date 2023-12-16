@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Account</title>
+    <link rel="stylesheet" href="{% static 'css/dialog.css' %}">
+    <link rel="stylesheet" href="{% static 'css/account.css' %}">
+</head>
+
+<body>
+    <div class="container" id="main-container">
+        <div id="mini-container">
+            <label for="username-inbox" id="username-label">username: </label>
+            <input type="text" value="{{ user.username }}" disabled="true" id="username-inbox" maxlength="30" name="username-inbox">
+            <button id="change-username" class="buttons" onclick="changeUsername()" >ändern</button>
+            <br>
+            <button id="logout-button" class="buttons" onclick="logout()">logout</button>
+            <button id="delete-account-button" class="buttons" onclick="openDialog('delete-account-dialog')">Account löschen</button>
+        </div>
+    </div>
+
+    {% if error_message %}
+        <div class="error" id="error-display">
+            {{ error_message }}
+        </div>
+    {% endif %}
+
+    <div id="body-overlay"></div>
+    <div class="dialog" id="delete-account-dialog">
+        <button class="close-dialog-button" onclick="closeDialog('delete-account-dialog')">x</button>
+        <h1>Bist du dir sicher?</h1>
+        
+        <button onclick="deleteAccount()" class="confirm_button" id="confirm">ja</button>
+        <button onclick="closeDialog('delete-account-dialog')" class="confirm_button" id="cancel">abbrechen</button>
+
+    </div>
+
+    <script>
+        var CSRF_TOKEN = '{{ csrf_token }}';
+    </script>
+    <script src="{% static 'js/accounts.js'%}"></script>
+    <script src="{% static 'js/dialog.js'%}"></script>
+
+</body>
+</html>

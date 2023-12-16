@@ -1,0 +1,64 @@
+<!doctype html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Einkaufsliste</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Edu+TAS+Beginner&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style_list.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dialog.css' %}">
+</head>
+<body>
+    <div id="header">
+        <h1>{{ list_name }}</h1>
+    </div>
+    
+    <button id="add-button" class="add_button" onclick="openDialog('add-item-dialog')">
+        +
+    </button>
+    
+    <div class="container">
+        {% for item in list_items %}
+        <div class="list-item">
+            {% if item.done == True %}
+            <input type="checkbox" id="{{ item.name }}" onchange="checkBoxes('{{ item.id }}', '{{ item.name }}')" checked="checked">
+            {% else %}
+            <input type="checkbox" id="{{ item.name }}" onchange="checkBoxes('{{ item.id }}', '{{ item.name }}')">
+            {% endif %}
+            {{ item.name }}
+            <input type="number" id="quantity-input" min="1" max="99999" value="{{ item.quantity }}" onchange="changeQuantity('{{ item.id }}')">
+            x
+
+            <button id="remove-button" onclick="deleteItem('{{ item.id }}')">
+                <img src="{% static 'resources/delete-icon.png' %}"
+                     alt="trashcan"
+                     width="15px"
+                     height="15px">
+            </button>
+            <div id="creation-date">{{ item.created_at }}</div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div id="body-overlay"></div>
+    <div class="dialog" id="add-item-dialog">
+        <button class="close-dialog-button" onclick="closeDialog('add-item-dialog')">x</button>
+        <h1>Schreibe etwas in die Liste:</h1>
+        <form action="">
+            <input type="text" placeholder="Was wird gebraucht?" class="input-field" id="add-new-item" maxlength="100">
+        </form>
+        <button id="final-add-button" class="add_button final_add_button" onclick="addItem()" disabled="true">+</button>
+    </div>
+
+    <script>
+        var CSRF_TOKEN = '{{ csrf_token }}';
+    </script>
+    <script src="{% static 'js/list.js'%}"></script>
+    <script src="{% static 'js/dialog.js'%}"></script>
+</body>
+</html>
